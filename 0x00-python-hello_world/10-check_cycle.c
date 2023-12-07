@@ -2,33 +2,25 @@
 
 /**
  * check_cycle - checks if a singly linked list has a cycle in it
- * @head: the listint_t arguement
+ * @list: the listint_t arguement
  *
  * Return: 0 if there is no cycle, 1 if there is a cycle
  */
 
-int check_cycle(listint_t *head)
+int check_cycle(listint_t *list)
 {
-    listint_t *slow_p = head, *fast_p = head;
+    listint_t *slow = list;
+    listint_t *fast = list;
 
-    if (head && head->next)
+    if (!list)
+        return (0);
+
+    while (slow && fast && fast->next)
     {
-        while (slow_p && fast_p && fast_p->next)
-        {
-            slow_p = slow_p->next;
-            fast_p = fast_p->next->next;
-
-            if (slow_p == fast_p)
-            {
-                slow_p = head;
-                while (slow_p != fast_p)
-                {
-                    slow_p = slow_p->next;
-                    fast_p = fast_p->next;
-                }
-                return (1);
-            }
-        }
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast)
+            return (1)
     }
     return (0);
 }
